@@ -1,0 +1,45 @@
+---
+title: "Tarea 2-Ejercicio de programación"
+author: "Lazo Sanchez Jorge Ivan"
+date: "05/10/2020-16/10/2020"
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1. Simula 50 tiros de una moneda justa. 
+```{r}
+moneda_justa = sample(c("sol","aguila"),size = 50, replace=TRUE)
+moneda_justa
+```
+
+## 2. Imprime una tabla con el número de veces que salió sol en el experimento.
+```{r}
+soles=data.frame(moneda_justa=="sol", moneda_justa)
+num_soles= length(moneda_justa[moneda_justa=="sol"])
+num_soles
+```
+
+## 3. Grafica cómo va cambiando la proporción de soles tiro a tiro.
+```{r}
+x=table(moneda_justa)/length(moneda_justa)
+barplot(x,ylim = c(0,1),col = rainbow(20, alpha = .6),ylab="Frecuencia",legend.text = x)
+```
+
+## 4. Toma una moneda no justa. Grafica la proporción de soles que salen primero en 20 tiros y luego en 1000 tiros. Tip: si haces una función esto puede resultar más fácil.
+```{r}
+proporciones =  function(num_tiros){
+  moneda_no_justa = sample(c("sol","aguila"),size = num_tiros, replace=TRUE,prob = c(.2,.8))
+m=table(moneda_no_justa)/length(moneda_no_justa)
+barplot(m,ylim = c(0,1),col = rainbow(20, alpha = .6),ylab="Frecuencia",legend.text = m, main = "Proporción entre tiros" )
+}
+proporciones(20)
+proporciones(1000)
+```
+
+
